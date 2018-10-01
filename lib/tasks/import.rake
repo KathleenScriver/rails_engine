@@ -11,8 +11,8 @@ task :import_all do
   Rake::Task["import:transactions"].invoke
 end
 
-
 namespace :import do
+
   description "Imports Customer CSV data"
   task customers: :environment do
     CSV.foreach('./lib/data/customers.csv', headers: true, header_converters: :symbols) do |row|
@@ -23,6 +23,7 @@ namespace :import do
                                   created_at: Time.parse(row[:created_at]),
                                   updated_at: Time.parse(row[:updated_at])
                                 )
+    end
   end
 
   description "Imports invoice_item csv data"
@@ -37,6 +38,7 @@ namespace :import do
                                       created_at: Time.parse(row[:created_at]),
                                       updated_at: Time.parse(row[:updated_at])
                                     )
+    end
   end
 
   description "Imports invoice csv data"
@@ -50,20 +52,22 @@ namespace :import do
                                       created_at: Time.parse(row[:created_at]),
                                       updated_at: Time.parse(row[:updated_at])
                                     )
+    end
   end
 
   description "Imports item csv data"
   task items: :environment do
     CSV.foreach('./lib/data/items.csv', headers: true, header_converters: :symbols) do |row|
       Item.find_or_create_by!(
-                                      id:          row[:id].to_i,
-                                      name:        row[:name],
-                                      description: row[:description],
-                                      unit_price:  row[:unit_price].to_i,
-                                      merchant_id: row[:merchant_id].to_i,
-                                      created_at:  Time.parse(row[:created_at]),
-                                      updated_at:  Time.parse(row[:updated_at])
-                                    )
+                              id:          row[:id].to_i,
+                              name:        row[:name],
+                              description: row[:description],
+                              unit_price:  row[:unit_price].to_i,
+                              merchant_id: row[:merchant_id].to_i,
+                              created_at:  Time.parse(row[:created_at]),
+                              updated_at:  Time.parse(row[:updated_at])
+                              )
+    end
   end
 
   description "Imports merchant CSV data"
@@ -75,6 +79,7 @@ namespace :import do
                                   created_at: Time.parse(row[:created_at]),
                                   updated_at: Time.parse(row[:updated_at])
                                 )
+    end
   end
 
   description "Imports transcation CSV data"
@@ -87,5 +92,6 @@ namespace :import do
                                   created_at: Time.parse(row[:created_at]),
                                   updated_at: Time.parse(row[:updated_at])
                                 )
+    end
   end
 end
