@@ -8,9 +8,10 @@ RSpec.describe Customer, type: :model do
 
   describe 'relationships' do
     it { should have_many(:invoices) }
+    it { should have_many(:merchants), through: :invoices }
   end
 
-  describe 'instance methods' do
+  describe 'class methods' do
     context '#favorite_merchant' do
       it 'should return merchant this customer has most successful transactions with' do
         customer = create(:customer)
