@@ -45,4 +45,15 @@ describe "Customer Search API" do
     expect(response).to be_successful
     expect(result["id"]).to eq(customer.id)
   end
+
+  it 'finds single record by customer updated at' do
+    customer = create(:customer)
+
+    get '/api/v1/customers/find?updated-at', params: {updated_at: customer.updated_at}
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(result["id"]).to eq(customer.id)
+  end
 end
