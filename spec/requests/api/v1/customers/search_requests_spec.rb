@@ -71,4 +71,19 @@ describe "Customer Search API" do
     expect(customers.count).to eq(2)
     expect(customers.first["first_name"]).to eq("Bob")
   end
+
+  it 'finds all records with matching last name' do
+    customer_1 = create(:customer, last_name: "Dylan")
+    customer_2 = create(:customer, last_name: "Macha")
+    customer_3 = create(:customer, last_name: "Dylan")
+    customer_4 = create(:customer, last_name: "Lopez")
+
+    get '/api/v1/customers/find_all?last_name', params: {last_name: "Dylan"}
+
+    customers = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(customers.count).to eq(2)
+    expect(customers.first["last_name"]).to eq("Dylan")
+  end
 end
