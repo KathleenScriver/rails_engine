@@ -63,7 +63,7 @@ describe "Customer Search API" do
     customer_3 = create(:customer, first_name: "John")
     customer_4 = create(:customer, first_name: "Bob")
 
-    get '/api/v1/customers/find_all?first_name', params: {first_name: "Bob"}
+    get '/api/v1/customers/find_all?first-name', params: {first_name: "Bob"}
 
     customers = JSON.parse(response.body)
 
@@ -78,12 +78,28 @@ describe "Customer Search API" do
     customer_3 = create(:customer, last_name: "Dylan")
     customer_4 = create(:customer, last_name: "Lopez")
 
-    get '/api/v1/customers/find_all?last_name', params: {last_name: "Dylan"}
+    get '/api/v1/customers/find_all?last-name', params: {last_name: "Dylan"}
 
     customers = JSON.parse(response.body)
 
     expect(response).to be_successful
     expect(customers.count).to eq(2)
     expect(customers.first["last_name"]).to eq("Dylan")
+  end
+
+  it 'finds all customers by created at' do
+    customer_1 = create(:customer, created_at: "2012-03-27 14:54:09 UTC")
+    customer_2 = create(:customer, created_at: "2012-01-27 11:54:09 UTC")
+    customer_3 = create(:customer, created_at: "2012-04-27 17:54:09 UTC")
+    customer_4 = create(:customer, created_at: "2012-03-27 14:54:09 UTC")
+
+    get '/api/v1/customers/find_all?created-at', params: {created_at: customer_1.created_at}
+
+    customers = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(customers.count).to eq(2)
+    expect(customers.first["id"]).to eq(customer_1.id)
+    expect(customers.second["id"]).to eq(customer_4.id)
   end
 end
