@@ -63,7 +63,7 @@ describe "Customer Search API" do
     customer_3 = create(:customer, first_name: "John")
     customer_4 = create(:customer, first_name: "Bob")
 
-    get '/api/v1/customers/find_all?first-name', params: {first_name: "Bob"}
+    get "/api/v1/customers/find_all?first_name=#{customer_1.first_name}"
 
     customers = JSON.parse(response.body)
 
@@ -78,7 +78,7 @@ describe "Customer Search API" do
     customer_3 = create(:customer, last_name: "Dylan")
     customer_4 = create(:customer, last_name: "Lopez")
 
-    get '/api/v1/customers/find_all?last-name', params: {last_name: "Dylan"}
+    get '/api/v1/customers/find_all?last_name', params: {last_name: "Dylan"}
 
     customers = JSON.parse(response.body)
 
