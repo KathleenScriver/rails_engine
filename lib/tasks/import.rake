@@ -15,7 +15,7 @@ namespace :import do
 
   desc "Imports Customer CSV data"
   task customers: :environment do
-    CSV.foreach('./lib/data/customers.csv', headers: true, header_converters: :symbols) do |row|
+    CSV.foreach('./lib/data/customers.csv', headers: true, header_converters: :symbol) do |row|
       Customer.find_or_create_by!(
                                   id:         row[:id].to_i,
                                   first_name: row[:first_name],
@@ -28,7 +28,7 @@ namespace :import do
 
   desc "Imports invoice_item csv data"
   task invoice_items: :environment do
-    CSV.foreach('./lib/data/invoice_items.csv', headers: true, header_converters: :symbols) do |row|
+    CSV.foreach('./lib/data/invoice_items.csv', headers: true, header_converters: :symbol) do |row|
       InvoiceItem.find_or_create_by!(
                                       id:         row[:id].to_i,
                                       item_id:    row[:item_id].to_i,
@@ -43,7 +43,7 @@ namespace :import do
 
   desc "Imports invoice csv data"
   task invoices: :environment do
-    CSV.foreach('./lib/data/invoices.csv', headers: true, header_converters: :symbols) do |row|
+    CSV.foreach('./lib/data/invoices.csv', headers: true, header_converters: :symbol) do |row|
       Invoice.find_or_create_by!(
                                       id:          row[:id].to_i,
                                       customer_id: row[:customer_id].to_i,
@@ -57,7 +57,7 @@ namespace :import do
 
   desc "Imports item csv data"
   task items: :environment do
-    CSV.foreach('./lib/data/items.csv', headers: true, header_converters: :symbols) do |row|
+    CSV.foreach('./lib/data/items.csv', headers: true, header_converters: :symbol) do |row|
       Item.find_or_create_by!(
                               id:          row[:id].to_i,
                               name:        row[:name],
@@ -72,7 +72,7 @@ namespace :import do
 
   desc "Imports merchant CSV data"
   task merchants: :environment do
-    CSV.foreach('./lib/data/merchants.csv', headers: true, header_converters: :symbols) do |row|
+    CSV.foreach('./lib/data/merchants.csv', headers: true, header_converters: :symbol) do |row|
       Merchant.find_or_create_by!(
                                   id:         row[:id].to_i,
                                   name:       row[:name],
@@ -84,7 +84,7 @@ namespace :import do
 
   desc "Imports transcation CSV data"
   task transactions: :environment do
-    CSV.foreach('./lib/data/transactions.csv', headers: true, header_converters: :symbols) do |row|
+    CSV.foreach('./lib/data/transactions.csv', headers: true, header_converters: :symbol) do |row|
       Transaction.find_or_create_by!(
                                   id:         row[:id].to_i,
                                   invoice_id: row[:invoice_id].to_i,
