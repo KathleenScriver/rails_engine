@@ -31,7 +31,7 @@ RSpec.describe Customer, type: :model do
         transaction_6 = invoice_5.transactions.create(result: "success")
         transaction_7 = invoice_6.transactions.create(result: "success")
 
-        expect(customer.favorite_merchant).to eq(merchant_3)
+        expect(Customer.favorite_merchant(customer.id)).to eq(merchant_3)
       end
     end
   end
