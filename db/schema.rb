@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20181002032929) do
   create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.time "created_at"
-    t.time "updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "invoices", force: :cascade do |t|
