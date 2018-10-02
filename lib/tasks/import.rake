@@ -1,7 +1,7 @@
 require 'csv'
 require 'time'
 
-description "Imports all CSV data"
+desc "Imports all CSV data"
 task :import_all do
   Rake::Task["import:customers"].invoke
   Rake::Task["import:invoice_items"].invoke
@@ -13,7 +13,7 @@ end
 
 namespace :import do
 
-  description "Imports Customer CSV data"
+  desc "Imports Customer CSV data"
   task customers: :environment do
     CSV.foreach('./lib/data/customers.csv', headers: true, header_converters: :symbols) do |row|
       Customer.find_or_create_by!(
@@ -26,7 +26,7 @@ namespace :import do
     end
   end
 
-  description "Imports invoice_item csv data"
+  desc "Imports invoice_item csv data"
   task invoice_items: :environment do
     CSV.foreach('./lib/data/invoice_items.csv', headers: true, header_converters: :symbols) do |row|
       InvoiceItem.find_or_create_by!(
@@ -41,7 +41,7 @@ namespace :import do
     end
   end
 
-  description "Imports invoice csv data"
+  desc "Imports invoice csv data"
   task invoices: :environment do
     CSV.foreach('./lib/data/invoices.csv', headers: true, header_converters: :symbols) do |row|
       Invoice.find_or_create_by!(
@@ -55,7 +55,7 @@ namespace :import do
     end
   end
 
-  description "Imports item csv data"
+  desc "Imports item csv data"
   task items: :environment do
     CSV.foreach('./lib/data/items.csv', headers: true, header_converters: :symbols) do |row|
       Item.find_or_create_by!(
@@ -70,7 +70,7 @@ namespace :import do
     end
   end
 
-  description "Imports merchant CSV data"
+  desc "Imports merchant CSV data"
   task merchants: :environment do
     CSV.foreach('./lib/data/merchants.csv', headers: true, header_converters: :symbols) do |row|
       Merchant.find_or_create_by!(
@@ -82,7 +82,7 @@ namespace :import do
     end
   end
 
-  description "Imports transcation CSV data"
+  desc "Imports transcation CSV data"
   task transactions: :environment do
     CSV.foreach('./lib/data/transactions.csv', headers: true, header_converters: :symbols) do |row|
       Transaction.find_or_create_by!(
