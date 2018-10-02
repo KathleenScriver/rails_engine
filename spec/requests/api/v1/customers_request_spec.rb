@@ -23,4 +23,31 @@ describe "Customer API" do
     expect(response).to be_successful
     expect(customer["id"]).to eq(id)
   end
+
+  it 'finds favorite merchant' do
+    customer = create(:customer)
+    merchant_1 = create(:merchant)
+    merchant_2 = create(:merchant)
+    merchant_3 = create(:merchant)
+    invoice_1 = create(:invoice, merchant_id: merchant_1.id, customer_id: customer.id)
+    invoice_2 = create(:invoice, merchant_id: merchant_2.id, customer_id: customer.id)
+    invoice_3 = create(:invoice, merchant_id: merchant_3.id, customer_id: customer.id)
+    invoice_4 = create(:invoice, merchant_id: merchant_3.id, customer_id: customer.id)
+    invoice_5 = create(:invoice, merchant_id: merchant_3.id, customer_id: customer.id)
+    invoice_6 = create(:invoice, merchant_id: merchant_2.id, customer_id: customer.id)
+    transaction_1 = invoice_1.transactions.create(result: "success")
+    transaction_2 = invoice_1.transactions.create(result: "success")
+    transaction_3 = invoice_2.transactions.create(result: "success")
+    transaction_4 = invoice_3.transactions.create(result: "success")
+    transaction_5 = invoice_4.transactions.create(result: "success")
+    transaction_6 = invoice_5.transactions.create(result: "success")
+    transaction_7 = invoice_6.transactions.create(result: "success")
+
+    get "/api/v1/customers/#{customer.id}/favorite_merchant"
+
+    merchant = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(merchant["name"]).to eq(merchant_3.name)
+  end
 end
