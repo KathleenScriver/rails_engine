@@ -43,7 +43,7 @@ describe "Customer API" do
     transaction_6 = invoice_5.transactions.create(result: "success")
     transaction_7 = invoice_6.transactions.create(result: "success")
 
-    get '/api/v1/customers/:id/favorite_merchant'
+    get "/api/v1/customers/#{customer.id}/favorite_merchant"
 
     merchant = JSON.parse(response.body)
 
