@@ -51,4 +51,15 @@ describe "Invoice Search API" do
     expect(response).to be_successful
     expect(invoice["id"]).to eq(invoice_2.id)
   end
+
+  it 'should find all invoices with matching id' do
+    invoices = create_list(:invoice, 8)
+
+    get '/api/v1/invoices/find_all?id=5'
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoice["id"]).to eq(8)
+  end
 end
