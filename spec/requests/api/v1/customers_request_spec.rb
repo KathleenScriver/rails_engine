@@ -14,7 +14,7 @@ describe "Customer API" do
   end
 
   it 'gets single customer by id' do
-    id = create(:customer).Aid
+    id = create(:customer).id
 
     get "/api/v1/customers/#{id}"
 
