@@ -36,8 +36,8 @@ RSpec.describe Merchant, type: :model do
 
     context '.most_revenue' do
       it 'should return top x merchants with highest revenue' do
-        expect(Merchant.most_revenue(2)). to eq([@merchant_1, @merchant_2])
-        expect(Merchant.most_revenue(1)). to eq([@merchant_2])
+        expect(Merchant.most_revenue(2)). to eq([@merchant_1, @merchant_3])
+        expect(Merchant.most_revenue(1)). to eq([@merchant_1])
       end
     end
   end
