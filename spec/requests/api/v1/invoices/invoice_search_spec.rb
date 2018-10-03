@@ -60,6 +60,6 @@ describe "Invoice Search API" do
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice["id"]).to eq(8)
+    expect(invoice.first["id"]).to eq(5)
   end
 end
