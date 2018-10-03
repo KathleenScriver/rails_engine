@@ -37,4 +37,18 @@ describe "Invoice Search API" do
     expect(response).to be_successful
     expect(invoice["id"]).to eq(invoice_3.id)
   end
+
+  it 'should find single invoice by updated at' do
+    invoice_1 = create(:invoice, updated_at: "2012-03-27 14:54:09 UTC" )
+    invoice_2 = create(:invoice, updated_at: "2012-04-27 14:54:09 UTC" )
+    invoice_3 = create(:invoice, updated_at: "2012-03-27 12:54:09 UTC" )
+    invoice_4 = create(:invoice, updated_at: "2012-07-27 14:54:09 UTC" )
+
+    get '/api/v1/invoices/find?updated_at', params: {updated_at: "2012-04-27 14:54:09 UTC"}
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoice["id"]).to eq(invoice_2.id)
+  end
 end
