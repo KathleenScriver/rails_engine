@@ -5,6 +5,6 @@ class Api::V1::Invoices::SearchController < ApplicationController
 
   private
   def search_params
-    params.permit(:id)
+    params.permit(:id, :status)
   end
 end
