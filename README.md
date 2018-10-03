@@ -13,7 +13,7 @@ Things you may want to cover:
 
 * Database creation
 1. `git@github.com:KathleenYruegas/rails_engine.git`
-1. `bundle`
+1. `bundle install`
 1. `rails g rspec:install` ??  Needed when cloning down project?
 1. `rake db:{drop,create,migrate}`
 1. `rake import_all`  (to seed all data - this can take awhile!)`
