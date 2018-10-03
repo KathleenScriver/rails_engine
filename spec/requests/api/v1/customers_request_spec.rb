@@ -50,4 +50,15 @@ describe "Customer API" do
     expect(response).to be_successful
     expect(merchant["name"]).to eq(merchant_3.name)
   end
+
+  it 'can return a random resource' do
+    customers = create_list(:customer, 10)
+
+    get '/api/v1/customers/random.json'
+
+    random_customer = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(customers.pluck(:first_name).include?(random_customer["first_name"])).to be_truthy
+  end
 end
