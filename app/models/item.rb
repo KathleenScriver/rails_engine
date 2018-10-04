@@ -6,10 +6,11 @@ class Item < ApplicationRecord
   default_scope { order :id }
 
   def self.most_revenue(quantity)
-    joins(:invoice_items, :invoices)
-     .select("items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
-     .merge(Invoice.unscoped.with_successful_transactions)
-     .group(:id, "invoices.id")
+    unscoped
+     .joins(invoices: :transactions)
+     .select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) as revenue")
+     .merge(Transaction.unscoped.success)
+     .group(:id)
      .order("revenue desc")
      .limit(quantity)
   end

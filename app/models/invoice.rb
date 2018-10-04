@@ -5,5 +5,4 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
   default_scope { order :id }
-  scope :with_successful_transactions, -> { joins(:transactions).select("invoices.*").merge(Transaction.unscoped.success) }
 end
