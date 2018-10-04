@@ -24,12 +24,25 @@ describe "Invoice Search API" do
     expect(result["id"]).to eq(invoice.id)
   end
 
-  it 'should find single invoice by merchant_id' do
+  it 'should find single invoice by customer_id' do
     other_invoice = create(:invoice)
     invoice = create(:invoice)
     merchant = invoice.merchant
 
     get "/api/v1/invoices/find?merchant_id=#{merchant.id}"
+
+    resulting_invoice = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(resulting_invoice["id"]).to eq(invoice.id)
+  end
+
+  it 'should find single invoice by customer_id' do
+    other_invoice = create(:invoice)
+    invoice = create(:invoice)
+    customer = invoice.customer
+
+    get "/api/v1/invoices/find?customer_id=#{customer.id}"
 
     resulting_invoice = JSON.parse(response.body)
 
