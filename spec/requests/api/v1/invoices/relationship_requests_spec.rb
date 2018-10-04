@@ -9,10 +9,10 @@ describe "Invoices API Relationship Endpoints" do
 
     get "/api/v1/invoices/#{invoice.id}/transactions"
 
-    resulting_transactions = JSON.parse(response.body)
+    results = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(resulting_transactions.count).to eq(12)
-    expect(resulting_transactions.pluck(:id).include?(transaction_99.id)).to be_falsey
+    expect(results["transactions"].count).to eq(12)
+    expect(results["transactions"].pluck(:id).include?(transaction_99.id)).to be_falsey
   end
 end
