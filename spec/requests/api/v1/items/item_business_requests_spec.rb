@@ -1,6 +1,6 @@
 require "rails_helper"
 
-descirbe "Item API Business Intelligence" do
+describe "Item API Business Intelligence" do
   before(:each) do
     @customer = create(:customer)
     @merchant_1 = create(:merchant)
