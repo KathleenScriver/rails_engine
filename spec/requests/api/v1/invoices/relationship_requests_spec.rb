@@ -27,4 +27,24 @@ describe "Invoices API Relationship Endpoints" do
     expect(response).to be_successful
     expect(results.count).to eq(8)
   end
+
+  it 'should return all associated items' do
+    invoice = create(:invoice)
+    item_1 = create(:item)
+    item_2 = create(:item)
+    item_3 = create(:item)
+    item_4 = create(:item)
+    item_5 = create(:item)
+    invoice_item_1 = create(:invoice_item, invoice_id: invoice.id, item_id: item_1.id)
+    invoice_item_1 = create(:invoice_item, invoice_id: invoice.id, item_id: item_2.id)
+    invoice_item_1 = create(:invoice_item, invoice_id: invoice.id, item_id: item_4.id)
+    invoice_item_1 = create(:invoice_item, invoice_id: invoice.id, item_id: item_5.id)
+
+    get "/api/v1/invoices/#{invoice.id}/items"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(result.count).to eq(4)
+  end
 end
