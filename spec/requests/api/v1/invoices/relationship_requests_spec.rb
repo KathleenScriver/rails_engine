@@ -48,7 +48,7 @@ describe "Invoices API Relationship Endpoints" do
     expect(result.count).to eq(4)
   end
 
-  it 'should return all associated customers' do
+  it 'should return associated customer' do
     invoice = create(:invoice)
     customer = invoice.customer
 
