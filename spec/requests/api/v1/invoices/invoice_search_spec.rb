@@ -129,4 +129,18 @@ describe "Invoice Search API" do
     expect(response).to be_successful
     expect(resulting_invoices.count).to eq(3)
   end
+
+  it 'should find all invoices by created at' do
+    invoice_1 = create(:invoice, created_at: "2012-03-27 12:54:09 UTC" )
+    invoice_2 = create(:invoice, created_at: "2012-04-27 14:54:09 UTC" )
+    invoice_3 = create(:invoice, created_at: "2012-03-27 12:54:09 UTC" )
+    invoice_4 = create(:invoice, created_at: "2012-07-27 14:54:09 UTC" )
+
+    get '/api/v1/invoices/find_all?created_at', params: {created_at: "2012-03-27 12:54:09 UTC"}
+
+    invoices = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoices.count).to eq(2)
+  end
 end
