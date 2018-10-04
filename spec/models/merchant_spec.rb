@@ -16,11 +16,11 @@ RSpec.describe Merchant, type: :model do
       @merchant_1 = create(:merchant)
       @merchant_2 = create(:merchant)
       @merchant_3 = create(:merchant)
-      @invoice_1 = create(:invoice, merchant_id: @merchant_1.id, customer_id: @customer.id)
+      @invoice_1 = create(:invoice, merchant_id: @merchant_1.id, customer_id: @customer.id, created_at: "2015-04-15")
       @invoice_2 = create(:invoice, merchant_id: @merchant_2.id, customer_id: @customer.id)
-      @invoice_3 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id)
+      @invoice_3 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id, created_at: "2015-04-15")
       @invoice_4 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id)
-      @invoice_5 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id)
+      @invoice_5 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id, created_at: "2015-04-15")
       @invoice_6 = create(:invoice, merchant_id: @merchant_2.id, customer_id: @customer.id)
       @item_1 = create(:item, merchant_id: @merchant_1.id)
       @item_2 = create(:item, merchant_id: @merchant_1.id)
@@ -60,6 +60,12 @@ RSpec.describe Merchant, type: :model do
       it 'should return top x merchants with most items sold' do
         expect(Merchant.most_items(2)). to eq([@merchant_1, @merchant_2])
         expect(Merchant.most_items(1)). to eq([@merchant_1])
+      end
+    end
+
+    context '.revenue_by_date' do
+      it 'should return total revenue for all mechants on given date' do
+        expect(Merchant.revenue_by_date("2015-04-15")).to eq(7575.80)
       end
     end
   end
