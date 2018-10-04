@@ -12,7 +12,7 @@ describe "Invoices API Relationship Endpoints" do
     results = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(results["transactions"].count).to eq(12)
-    expect(results["transactions"].pluck(:id).include?(transaction_99.id)).to be_falsey
+    expect(results.count).to eq(12)
+    expect(results.pluck(:id).include?(transaction_99.id)).to be_falsey
   end
 end
