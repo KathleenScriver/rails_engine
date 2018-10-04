@@ -41,6 +41,12 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_8 = create(:invoice_item, invoice_id: @invoice_5.id, quantity: 1, unit_price: 20000)
       @invoice_item_9 = create(:invoice_item, invoice_id: @invoice_6.id, quantity: 2, unit_price: 8800)
       @invoice_item_10 = create(:invoice_item, invoice_id: @invoice_6.id, quantity: 1, unit_price: 29200)
+      @transaction_1 = create(:transaction, invoice_id: @invoice_1.id)
+      @transaction_2 = create(:transaction, invoice_id: @invoice_2.id)
+      @transaction_3 = create(:transaction, invoice_id: @invoice_3.id)
+      @transaction_4 = create(:transaction, invoice_id: @invoice_4.id, result: "pending")
+      @transaction_5 = create(:transaction, invoice_id: @invoice_5.id)
+      @transaction_6 = create(:transaction, invoice_id: @invoice_6.id)
     end
 
     context '.most_revenue' do
@@ -52,8 +58,8 @@ RSpec.describe Merchant, type: :model do
 
     context '.most_items' do
       it 'should return top x merchants with most items sold' do
-        expect(Merchant.most_items(2)). to eq([@merchant_3, @merchant_1])
-        expect(Merchant.most_items(1)). to eq([@merchant_3])
+        expect(Merchant.most_items(2)). to eq([@merchant_1, @merchant_2])
+        expect(Merchant.most_items(1)). to eq([@merchant_1])
       end
     end
   end
