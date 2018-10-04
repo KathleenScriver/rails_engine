@@ -12,12 +12,12 @@ describe "Merchant Business API" do
     @invoice_4 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id)
     @invoice_5 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id)
     @invoice_6 = create(:invoice, merchant_id: @merchant_2.id, customer_id: @customer.id)
-    @transaction_1 = create(:transaction, invoice_id: @invoice_1)
-    @transaction_2 = create(:transaction, invoice_id: @invoice_2)
-    @transaction_3 = create(:transaction, invoice_id: @invoice_3)
-    @transaction_4 = create(:transaction, invoice_id: @invoice_4, result: "pending")
-    @transaction_5 = create(:transaction, invoice_id: @invoice_5)
-    @transaction_6 = create(:transaction, invoice_id: @invoice_6)
+    @transaction_1 = create(:transaction, invoice_id: @invoice_1.id)
+    @transaction_2 = create(:transaction, invoice_id: @invoice_2.id)
+    @transaction_3 = create(:transaction, invoice_id: @invoice_3.id)
+    @transaction_4 = create(:transaction, invoice_id: @invoice_4.id, result: "pending")
+    @transaction_5 = create(:transaction, invoice_id: @invoice_5.id)
+    @transaction_6 = create(:transaction, invoice_id: @invoice_6.id)
     @item_1 = create(:item, merchant_id: @merchant_1.id)
     @item_2 = create(:item, merchant_id: @merchant_1.id)
     @item_3 = create(:item, merchant_id: @merchant_1.id)
@@ -58,6 +58,6 @@ describe "Merchant Business API" do
     expect(response).to be_successful
     expect(merchants.count).to eq(2)
     expect(merchants.first["name"]).to eq(@merchant_1.name)
-    expect(merchants.second["name"]).to eq(@merchant_3.name)
+    expect(merchants.second["name"]).to eq(@merchant_2.name)
   end
 end
