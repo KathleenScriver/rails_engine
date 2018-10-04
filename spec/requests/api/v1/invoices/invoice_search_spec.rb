@@ -62,4 +62,17 @@ describe "Invoice Search API" do
     expect(response).to be_successful
     expect(invoice.first["id"]).to eq(5)
   end
+
+  it 'should find all invoices with matching status' do
+    invoices = create_list(:invoice, 7)
+    invoice_8 = create(:invoice, status: "pending")
+    invoices << invoice_8
+
+    get '/api/v1/invoices/find_all?status=shipped'
+
+    resulting_invoices = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(resulting_invoices.count).to eq(7)
+  end
 end
