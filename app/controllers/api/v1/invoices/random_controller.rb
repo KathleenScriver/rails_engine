@@ -1,4 +1,5 @@
 class Api::V1::Invoices::RandomController < ApplicationController
   def show
-  end 
+    render json: Invoice.find(rand(1..(Invoice.count)))
+  end
 end
