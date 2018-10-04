@@ -13,12 +13,13 @@ Rails.application.routes.draw do
         get 'find', to: 'search#show'
         get 'find_all', to: 'search#index'
         get 'random', to: 'random#show'
+        get ':id/transactions', to: 'transactions#index'
       end
 
       namespace :merchants do
         get 'most_revenue', to: 'most_revenue#index'
         get 'most_items', to: 'most_items#index'
-      end 
+      end
 
       resources :customers, only: [:index, :show]
 
