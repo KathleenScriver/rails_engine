@@ -157,4 +157,15 @@ describe "Invoice Search API" do
     expect(response).to be_successful
     expect(invoices.count).to eq(2)
   end
+
+  it 'returns a random resource' do
+    invoices = create_list(:invoice, 15)
+
+    get '/api/v1/invoices/random.json'
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoices.pluck(:id).include?(invoice["id"])).to be_truthy
+  end
 end
