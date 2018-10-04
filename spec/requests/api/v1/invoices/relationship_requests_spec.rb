@@ -55,8 +55,8 @@ describe "Invoices API Relationship Endpoints" do
     get "/api/v1/invoices/#{invoice.id}/customer"
 
     result = JSON.parse(response.body)
-require "pry"; binding.pry
+
     expect(response).to be_successful
-    expect(result)
+    expect(result["id"]).to eq(customer.id)
   end
 end
