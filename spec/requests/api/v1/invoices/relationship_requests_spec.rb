@@ -47,4 +47,16 @@ describe "Invoices API Relationship Endpoints" do
     expect(response).to be_successful
     expect(result.count).to eq(4)
   end
+
+  it 'should return all associated customers' do
+    invoice = create(:invoice)
+    customer = invoice.customer
+
+    get "/api/v1/invoices/#{invoice.id}/customer"
+
+    result = JSON.parse(response.body)
+require "pry"; binding.pry
+    expect(response).to be_successful
+    expect(result)
+  end
 end
