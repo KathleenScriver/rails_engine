@@ -11,4 +11,15 @@ describe "Invoice API" do
     expect(response).to be_successful
     expect(invoices.count).to eq(5)
   end
+
+  it 'gets one invoice' do
+    invoice = create(:invoice)
+
+    get "/api/v1/invoices/#{invoice.id}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(result["id"]).to eq(invoice.id)
+  end
 end
