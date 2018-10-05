@@ -65,7 +65,7 @@ RSpec.describe Merchant, type: :model do
 
     context '.revenue_by_date' do
       it 'should return total revenue for all mechants on given date' do
-        expect(Merchant.revenue_by_date("2015-04-15")).to eq(7575.80)
+        expect(Merchant.revenue_by_date("2015-04-15")).to eq(314700.0)
       end
     end
   end
