@@ -86,11 +86,12 @@ namespace :import do
   task transactions: :environment do
     CSV.foreach('./lib/data/transactions.csv', headers: true, header_converters: :symbol) do |row|
       Transaction.find_or_create_by!(
-                                  id:         row[:id].to_i,
-                                  invoice_id: row[:invoice_id].to_i,
-                                  result:     row[:result],
-                                  created_at: Time.parse(row[:created_at]),
-                                  updated_at: Time.parse(row[:updated_at])
+                                  id:                 row[:id].to_i,
+                                  invoice_id:         row[:invoice_id].to_i,
+                                  credit_card_number: row[:credit_card_number],
+                                  result:             row[:result],
+                                  created_at:         Time.parse(row[:created_at]),
+                                  updated_at:         Time.parse(row[:updated_at])
                                 )
     end
   end
