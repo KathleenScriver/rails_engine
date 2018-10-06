@@ -69,4 +69,13 @@ describe "Merchant Business API" do
     expect(response).to be_successful
     expect(total_revenue).to eq({"total_revenue"=>"3147.00"})
   end
+
+  it' should return total revenue for one merchant' do
+    get '/api/v1/merchants/:id/revenue'
+
+    revenue = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(revenue).to eq("revenue"=>"455.00")
+  end
 end
