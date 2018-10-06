@@ -6,11 +6,11 @@ describe "Merchant Business API" do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
     @merchant_3 = create(:merchant)
-    @invoice_1 = create(:invoice, merchant_id: @merchant_1.id, customer_id: @customer.id)
+    @invoice_1 = create(:invoice, merchant_id: @merchant_1.id, customer_id: @customer.id, created_at: "2015-04-15")
     @invoice_2 = create(:invoice, merchant_id: @merchant_2.id, customer_id: @customer.id)
-    @invoice_3 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id)
+    @invoice_3 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id, created_at: "2015-04-15")
     @invoice_4 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id)
-    @invoice_5 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id)
+    @invoice_5 = create(:invoice, merchant_id: @merchant_3.id, customer_id: @customer.id, created_at: "2015-04-15")
     @invoice_6 = create(:invoice, merchant_id: @merchant_2.id, customer_id: @customer.id)
     @transaction_1 = create(:transaction, invoice_id: @invoice_1.id)
     @transaction_2 = create(:transaction, invoice_id: @invoice_2.id)
@@ -58,6 +58,15 @@ describe "Merchant Business API" do
     expect(response).to be_successful
     expect(merchants.count).to eq(2)
     expect(merchants.first["name"]).to eq(@merchant_1.name)
-    expect(merchants.second["name"]).to eq(@merchant_3.name)
+    expect(merchants.second["name"]).to eq(@merchant_2.name)
+  end
+
+  it 'should return total revenue for all merchants on given date' do
+    get '/api/v1/merchants/revenue?date=2015-04-15'
+
+    total_revenue = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(total_revenue).to eq(5093.43)
   end
 end
