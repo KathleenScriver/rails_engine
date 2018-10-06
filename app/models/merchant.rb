@@ -32,4 +32,12 @@ class Merchant < ApplicationRecord
      .where(created_at: (date.to_datetime.beginning_of_day..date.to_datetime.end_of_day))
      .sum("invoice_items.quantity * invoice_items.unit_price")
   end
+
+  def self.single_revenue(id)
+     find(id).invoices
+      .joins(:transactions, :invoice_items)
+      .select("invoices.id, invoice_items.quantity, invoice_items.unit_price")
+      .merge(Transaction.unscoped.success)
+      .sum("invoice_items.quantity * invoice_items.unit_price")
+  end
 end

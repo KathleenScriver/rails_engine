@@ -4,6 +4,6 @@ class Api::V1::Merchants::RevenueController < ApplicationController
   end
 
   def show
-
-  end 
+    render json: Merchant.single_revenue(params[:id]), serializer: SingleMerchantRevenueSerializer
+  end
 end

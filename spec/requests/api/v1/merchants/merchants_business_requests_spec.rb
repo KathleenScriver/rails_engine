@@ -71,11 +71,12 @@ describe "Merchant Business API" do
   end
 
   it' should return total revenue for one merchant' do
-    get '/api/v1/merchants/:id/revenue'
+
+    get "/api/v1/merchants/#{@merchant_1.id}/revenue"
 
     revenue = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(revenue).to eq("revenue"=>"455.00")
+    expect(revenue).to eq("revenue"=>"2525.00")
   end
 end
