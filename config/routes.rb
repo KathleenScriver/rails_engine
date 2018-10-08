@@ -28,12 +28,14 @@ Rails.application.routes.draw do
       end
 
       namespace :items do
+        get 'find', to: 'search#show'
+        get 'find_all', to: 'search#index'
         get 'most_revenue', to: 'most_revenue#index'
       end
 
       resources :customers, only: [:index, :show]
       resources :invoices, only: [:index, :show]
-
+      resources :items, only: [:index, :show]
     end
   end
 end
