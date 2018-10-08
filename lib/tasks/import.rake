@@ -34,7 +34,7 @@ namespace :import do
                                       item_id:    row[:item_id].to_i,
                                       invoice_id: row[:invoice_id].to_i,
                                       quantity:   row[:quantity].to_i,
-                                      unit_price: row[:unit_price].to_f,
+                                      unit_price: row[:unit_price].to_i,
                                       created_at: Time.parse(row[:created_at]),
                                       updated_at: Time.parse(row[:updated_at])
                                     )
@@ -62,7 +62,7 @@ namespace :import do
                               id:          row[:id].to_i,
                               name:        row[:name],
                               description: row[:description],
-                              unit_price:  row[:unit_price].to_f,
+                              unit_price:  row[:unit_price].to_i,
                               merchant_id: row[:merchant_id].to_i,
                               created_at:  Time.parse(row[:created_at]),
                               updated_at:  Time.parse(row[:updated_at])

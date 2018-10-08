@@ -63,7 +63,7 @@ describe "Items API" do
 
   it 'should find one item by the price' do
     item_1 = create(:item)
-    item = create(:item, unit_price: 77481)
+    item = create(:item, unit_price: "77.81")
 require "pry"; binding.pry
     get "/api/v1/items/find?unit-price=#{item.unit_price}"
 
