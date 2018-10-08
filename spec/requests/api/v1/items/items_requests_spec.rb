@@ -64,7 +64,7 @@ describe "Items API" do
   it 'should find one item by the price' do
     item_1 = create(:item)
     item = create(:item, unit_price: "77.81")
-require "pry"; binding.pry
+
     get "/api/v1/items/find?unit-price=#{item.unit_price}"
 
     result = JSON.parse(response.body)
@@ -72,5 +72,17 @@ require "pry"; binding.pry
     expect(response).to be_successful
     expect(result["id"]).to eq(item.id)
     expect(result["name"]).to eq(item.name)
+  end
+
+  it 'should find all items by id' do
+    items = create_list(:item, 12)
+    id = items[1].id
+
+    get "/api/v1/items/find_all?id=#{id}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(result.first["id"]).to eq(id)
   end
 end
