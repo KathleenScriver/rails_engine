@@ -5,6 +5,6 @@ class Api::V1::Items::SearchController < ApplicationController
 
   private
   def search_params
-    params.permit(:id, :name)
+    params.permit(:id, :name, :description)
   end
 end
