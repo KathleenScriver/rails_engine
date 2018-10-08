@@ -34,4 +34,16 @@ describe "Items API" do
     expect(result["id"]).to eq(item.id)
     expect(result["name"]).to eq(item.name)
   end
+
+  it 'should find item by name' do
+    item = create(:item)
+
+    get "/api/v1/items/find?name=#{item.name}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(result["id"]).to eq(item.id)
+    expect(result["name"]).to eq(item.name)
+  end
 end
