@@ -36,6 +36,7 @@ describe "Items API" do
   end
 
   it 'should find item by name' do
+    item_1 = create(:item)
     item = create(:item)
 
     get "/api/v1/items/find?name=#{item.name}"
