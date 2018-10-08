@@ -50,9 +50,22 @@ describe "Items API" do
 
   it 'should find item by description' do
     item_1 = create(:item)
-    item = create(:item, description: "This is an item of sorts.")
+    item = create(:item, description: "These will keep you warm on cold nights")
 
     get "/api/v1/items/find?description=#{item.description}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(result["id"]).to eq(item.id)
+    expect(result["name"]).to eq(item.name)
+  end
+
+  it 'should find one item by the price' do
+    item_1 = create(:item)
+    item = create(:item, unit_price: 77481)
+require "pry"; binding.pry
+    get "/api/v1/items/find?unit-price=#{item.unit_price}"
 
     result = JSON.parse(response.body)
 
