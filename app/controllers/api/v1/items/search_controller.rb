@@ -4,7 +4,11 @@ class Api::V1::Items::SearchController < ApplicationController
   end
 
   def index
-    render json: Item.where(search_params)
+    if params[:unit_price]
+      render json: Item.where(unit_price: params[:unit_price].gsub(/\D/,"")) if params[:unit_price]
+    else
+      render json: Item.where(search_params)
+    end
   end
 
   private
@@ -14,7 +18,7 @@ class Api::V1::Items::SearchController < ApplicationController
                   :description,
                   :created_at,
                   :updated_at,
-                  :merchant_id,
-                  :unit_price)
+                  :merchant_id)
+
   end
 end
