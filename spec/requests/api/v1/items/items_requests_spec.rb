@@ -9,6 +9,17 @@ describe "Items API" do
     result = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(result.count).to eq(15)   
+    expect(result.count).to eq(15)
+  end
+
+  it 'should return one item' do
+    item = create(:item)
+
+    get "/api/v1/items/#{item.id}.json"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(result["id"]).to eq(item.id)
   end
 end
